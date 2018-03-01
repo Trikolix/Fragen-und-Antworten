@@ -1,0 +1,20 @@
+#header {
+	font-size: x-large;
+	background-color: greenyellow;
+	width: -moz-fit-content;
+	height: -moz-fit-content;
+	padding: 2%;
+	border-radius: 5px;
+}
+#main {
+	width: -moz-fit-content;
+	text-align: left;
+}
+fieldset {
+	border: none;
+}
+
+label::after {
+	content: "";
+	display: block;
+}
