@@ -15,13 +15,14 @@
   </div>
   <div id="main">
   <form>
-    <p>Wie schmeckt Bier am besten?</p>
+    <p>Wie schmeckt dir das Bier am besten?</p>
     <fieldset>
 		<input type="radio" id="answer_a" name="Frage" value="Mastercard"><label for="answer_a">In rauen Mengen (>5Liter)</label>
 		<input type="radio" id="answer_b" name="Frage" value="Mastercard"><label for="answer_b">Ich mag kein Bier.</label>
 		<input type="radio" id="answer_c" name="Frage" value="Mastercard"><label for="answer_c">Kalt</label>
 		<input type="radio" id="answer_d" name="Frage" value="Mastercard"><label for="answer_c">Saufen! Morgens, Mittags, Abends ich will saufen!</label>
     </fieldset>
+	<center><button>Absenden</button></center>
   </form>
 <?php
 
