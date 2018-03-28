@@ -4,7 +4,7 @@ Datenbank: SQLite
 
 Entwicklungsumgebung: jeder für sich
 
-Tabellen:
+## Tabellen:
 
 - Logindaten (ID, NUtzername, Passwort, Name, Nutzergruppe(ID))
 - Nutzergruppen (ID, BEzeichnung)
@@ -17,25 +17,23 @@ Tabellen:
 
 ## Seiten
 ### header.php
-
--Session mitgeben
-
--Benutzercontrollfeld (wer ist eingelogt, ausloggen, (frage bearbeiten))
+- Session mitgeben
+- Benutzercontrollfeld (wer ist eingelogt, ausloggen, (frage bearbeiten))
 
 ### index.php
--login
+- login
 
 ### login2.php
--überprüft eingegebene Logindaten, leitet weiter
+- überprüft eingegebene Logindaten, leitet weiter
 
 ### fragen.php
--zeigt fragen an, wertet Antwort aus
+- zeigt fragen an, wertet Antwort aus
 
-###auswertung.php
+### auswertung.php
 
 
 ### fragen-erstellen.php
--
+- 
 
 ### logout.php
--
+- 
