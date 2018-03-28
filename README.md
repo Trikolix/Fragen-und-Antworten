@@ -1,8 +1,11 @@
 # Fragen-und-Antworten
 
 Datenbank: SQLite
+
 Entwicklungsumgebung: jeder für sich
+
 Tabellen:
+
 - Logindaten (ID, NUtzername, Passwort, NAme, Nutzergruppe(ID))
 - Nutzergruppen (ID, BEzeichnung)
 	Admins --> Fragen erstellen, beantworten, Statistik zu eigenen Fragen (eigene Fragen bearbeiten / löschen)
