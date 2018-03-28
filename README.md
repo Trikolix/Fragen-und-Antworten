@@ -15,24 +15,27 @@ Tabellen:
 - Antworten (ID, Antwort, Flag(Richtig/falsch), FRageID)
 - gegebene Antworten(iD, FRageId, NutzerId, AntwortId, Datum, Flag(richtig/falsch))
 
-Seiten
-header.php
+##Seiten
+###header.php
+
 -Session mitgeben
+
 -Benutzercontrollfeld (wer ist eingelogt, ausloggen, (frage bearbeiten))
-index.php
+
+###index.php
 -login
 
-login2.php
+###login2.php
 -überprüft eingegebene Logindaten, leitet weiter
 
-fragen.php
+###fragen.php
 -zeigt fragen an, wertet Antwort aus
 
-auswertung.php
+###auswertung.php
 
 
-fragen-erstellen.php
+###fragen-erstellen.php
 -
 
-logout.php
+###logout.php
 -
