@@ -3,7 +3,7 @@
 Datenbank: SQLite
 Entwicklungsumgebung: jeder für sich
 Tabellen:
-- LOgindaten (ID, NUtzername, Passwort, NAme, Nutzergruppe(ID))
+- Logindaten (ID, NUtzername, Passwort, NAme, Nutzergruppe(ID))
 - Nutzergruppen (ID, BEzeichnung)
 	Admins --> Fragen erstellen, beantworten, Statistik zu eigenen Fragen (eigene Fragen bearbeiten / löschen)
 	Studenten / Nutzer --> Fragen beantworten
@@ -26,7 +26,7 @@ fragen.php
 -zeigt fragen an, wertet Antwort aus
 
 auswertung.php
--
+
 
 fragen-erstellen.php
 -
