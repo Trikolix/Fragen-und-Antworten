@@ -30,7 +30,7 @@ Entwicklungsumgebung: jeder für sich
 - zeigt fragen an, wertet Antwort aus
 
 ### auswertung.php
-
+- 
 
 ### fragen-erstellen.php
 - 
