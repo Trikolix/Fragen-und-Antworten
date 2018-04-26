@@ -25,8 +25,23 @@
 	<center><button>Absenden</button></center>
   </form>
 <?php
+$db = new SQLite3('database.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+var_dump($db);
+$statement = $db->query('SELECT * FROM "questions"');
+var_dump($statement);
+$row = mysqli_fetch_object($statement);
 
-
+echo "	<form>
+		<p>".$row->question."</p>
+		<fieldset>";
+$statement = $db->query('SELECT * FROM "answers" WHERE question_id = '.$row->id.' ORDER BY RAND()');
+while ($row = mysqli_fetch_object($statement))
+{
+	echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
+}
+echo "	    </fieldset>
+		<center><button>Absenden</button></center>
+	</form>";
 ?>
   </div>
   </center>
