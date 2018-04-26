@@ -38,6 +38,42 @@ $db->query('INSERT INTO "users" ("username", "password", "real_name", "user_grou
 $db->query('INSERT INTO "users" ("username", "password", "real_name", "user_group_id")
     VALUES ("Penzel", md5("Salatgurke"), "Penzel", 3)');	
 	
+$db->query('CREATE TABLE IF NOT EXISTS "questions" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"question" VARCHAR,
+	"creator_id" INTEGER,
+	FOREIGN KEY (creator_id) REFERENCES users(id)
+)');
 
+$db->query('CREATE TABLE IF NOT EXISTS "answers" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"question_id" INTEGER,
+	"answer" VARCHAR,
+	"flag" BOOLEAN,	
+	FOREIGN KEY (question_id) REFERENCES questions(id)
+)');
+
+$db->query('INSERT INTO "questions" ("id", "question", "creator_id")
+    VALUES (1, "Bekommen wir eine 1,0 auf den Beleg?", 1)');	
+	
+$db->query('INSERT INTO "answers" ("question_id", "answer", "flag")
+    VALUES (1, "Ja", 1)');
+$db->query('INSERT INTO "answers" ("question_id", "answer", "flag")
+    VALUES (1, "Definitiv!", 1)');	
+$db->query('INSERT INTO "answers" ("question_id", "answer", "flag")
+    VALUES (1, "Vielleicht", 0)');
+$db->query('INSERT INTO "answers" ("question_id", "answer", "flag")
+    VALUES (1, "Aber sicher doch!", 1)');
+	
+$db->query('CREATE TABLE IF NOT EXISTS "given_answers" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"question_id" INTEGER,
+	"user_id" INTEGER,
+	"answer_id" INTEGER,
+	"time" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"flag" BOOLEAN,	
+	FOREIGN KEY (question_id) REFERENCES questions(id),
+	FOREIGN KEY (answer_id) REFERENCES answers(id)
+)');
 
 ?>
