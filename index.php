@@ -14,35 +14,24 @@
 	Fragen und Antworten
   </div>
   <div id="main">
-  <form>
-    <p>Wie schmeckt dir das Bier am besten?</p>
-    <fieldset>
-		<input type="radio" id="answer_a" name="Frage" value="Mastercard"><label for="answer_a">In rauen Mengen (>5Liter)</label>
-		<input type="radio" id="answer_b" name="Frage" value="Mastercard"><label for="answer_b">Ich mag kein Bier.</label>
-		<input type="radio" id="answer_c" name="Frage" value="Mastercard"><label for="answer_c">Kalt</label>
-		<input type="radio" id="answer_d" name="Frage" value="Mastercard"><label for="answer_c">Saufen! Morgens, Mittags, Abends ich will saufen!</label>
-    </fieldset>
-	<center><button>Absenden</button></center>
-  </form>
-<?php
-$db = mysqli_connect("127.0.0.1", "project_user", "", "project_x");
-//$db = new SQLite3('database.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+  <?php
+	include "connect.php";
+	
+	$statement = mysqli_query($db, "SELECT * FROM questions ORDER BY RAND() LIMIT 1");
 
-$statement = mysqli_query($db, "SELECT * FROM questions ORDER BY RAND() LIMIT 1");
-
-while ($row = mysqli_fetch_object($statement))
-{
-echo "	<form>
-		<p>".$row->question."</p>
-		<fieldset>";
-$id = $row->id;
-}
-$statement = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$id." ORDER BY RAND()");
-while ($row = mysqli_fetch_object($statement))
-{
-	echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
-}
-echo "	    </fieldset>
+	while ($row = mysqli_fetch_object($statement))
+	{
+		$id = $row->id;
+		echo "<form>
+				<p>".$row->question."</p>
+				<fieldset>";
+	}
+	$statement = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$id." ORDER BY RAND()");
+	while ($row = mysqli_fetch_object($statement))
+	{
+		echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
+	}
+	echo "</fieldset>
 		<center><button>Absenden</button></center>
 	</form>";
 ?>
