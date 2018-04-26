@@ -28,7 +28,7 @@
 $db = mysqli_connect("127.0.0.1", "project_user", "", "project_x");
 //$db = new SQLite3('database.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
-$statement = mysqli_query($db, "SELECT * FROM questions");
+$statement = mysqli_query($db, "SELECT * FROM questions ORDER BY RAND() LIMIT 1");
 
 while ($row = mysqli_fetch_object($statement))
 {
