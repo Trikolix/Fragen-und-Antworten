@@ -35,25 +35,18 @@ if ($_POST)
 	
 	if (isset($_POST['flag1']))
 		$flag1 = 1;
-	echo $flag1;
 	if (isset($_POST['flag2']))
 		$flag2 = 1;
-	echo $flag2;
 	if (isset($_POST['flag3']))
 		$flag3 = 1;
-	echo $flag3;
 	if (isset($_POST['flag4']))
 		$flag4 = 1;
-	echo $flag4;
 	
 	$abfrage = mysqli_query($db, "INSERT INTO questions (question) values ('".$frage."')");
 	$question_id = mysqli_insert_id($db);
 	
 	if (strlen($antwort1) > 0){
-		echo "yes";
 		$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort1."', '".$flag1."' )");
-		var_dump($abfrage);
-	}
 	
 	if (strlen($antwort2) > 0)
 		$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort2."', '".$flag2."' )");
