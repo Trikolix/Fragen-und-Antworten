@@ -22,6 +22,7 @@ Entwicklungsumgebung: jeder für sich
 
 ### index.php
 - login
+- https://www.php-einfach.de/experte/php-codebeispiele/loginscript/
 
 ### login2.php
 - überprüft eingegebene Logindaten, leitet weiter
