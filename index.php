@@ -1,3 +1,6 @@
+<?php 
+include "connect.php";
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -15,8 +18,7 @@
   </div>
   <div id="main">
   <?php
-	include "connect.php";
-	
+		
 	$statement = mysqli_query($db, "SELECT * FROM questions ORDER BY RAND() LIMIT 1");
 
 	while ($row = mysqli_fetch_object($statement))

@@ -1,7 +1,10 @@
+<?php 
+include "connect.php";
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-  <title>Fragen & Antworten</title>              
+  <title>Fragen & Antworten | Frage erstellen</title>              
 	<link href="style.css" type="text/css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Fragen und Antwprten, Der Dozent stellt Fragen, die Studenten antworten." />
@@ -15,8 +18,6 @@
   </div>
   <div id="main">
 <?php 
-include "connect.php";
-
 function get_anti_spam_code(){
 	$anti_spam_value = 234;
 	$anti_spam = (date("dmy", time())) + $anti_spam_value;
