@@ -1,4 +1,20 @@
-<?php
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <title>Fragen & Antworten</title>              
+	<link href="style.css" type="text/css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Fragen und Antwprten, Der Dozent stellt Fragen, die Studenten antworten." />
+	<meta name="keywords" content="Fragen, Antworten, Quiz, Auswertung, BA-Glauchau" />
+	<meta name="language" content="de, at" />
+  </head>  
+  <body>
+  <center> 
+  <div id="header">
+	Fragen und Antworten
+  </div>
+  <div id="main">
+<?php 
 include "connect.php";
 
 function get_anti_spam_code(){
@@ -17,6 +33,7 @@ $flag1 = 0;
 $flag2 = 0;
 $flag3 = 0;
 $flag4 = 0;
+
 if ($_POST)
 {
 	$erfolg = 1;
@@ -28,11 +45,14 @@ if ($_POST)
 		$erfolg = 0;
 		$ausgabe = "Die Frage scheint mir ganz schön kurz oder viel zu lang zu sein!<br>";
 	}
+	
+	//Antworten
 	$antwort1 = $_POST['antwort1'];
 	$antwort2 = $_POST['antwort2'];
 	$antwort3 = $_POST['antwort3'];
 	$antwort4 = $_POST['antwort4'];
 	
+	//Flags
 	if (isset($_POST['flag1']))
 		$flag1 = 1;
 	if (isset($_POST['flag2']))
@@ -42,20 +62,26 @@ if ($_POST)
 	if (isset($_POST['flag4']))
 		$flag4 = 1;
 	
-	$abfrage = mysqli_query($db, "INSERT INTO questions (question) values ('".$frage."')");
-	$question_id = mysqli_insert_id($db);
-	
-	if (strlen($antwort1) > 0){
-		$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort1."', '".$flag1."' )");
-	
-	if (strlen($antwort2) > 0)
-		$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort2."', '".$flag2."' )");
-	
-	if (strlen($antwort3) > 0)
-		$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort3."', '".$flag3."' )");
-	
-	if (strlen($antwort4) > 0)
-		$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort4."', '".$flag4."' )");
+	//Eintragen in Datenbank
+	if ($erfolg == 1)
+	{	
+		$abfrage = mysqli_query($db, "INSERT INTO questions (question) values ('".$frage."')");
+		$question_id = mysqli_insert_id($db);
+		
+		if (strlen($antwort1) > 0)
+		{
+			$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort1."', '".$flag1."' )");
+		
+		if (strlen($antwort2) > 0)
+			$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort2."', '".$flag2."' )");
+		
+		if (strlen($antwort3) > 0)
+			$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort3."', '".$flag3."' )");
+		
+		if (strlen($antwort4) > 0)
+			$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort4."', '".$flag4."' )");
+		}
+	}
 }
 echo "<form method='post' action='submit_question.php' class='form'>
 	<table class='anmeldung'>
@@ -67,9 +93,10 @@ echo "<form method='post' action='submit_question.php' class='form'>
 			<tr><td>Antwort 4:</td><td><input name='antwort4' type='text' maxlength='60' size='35' value='".$antwort4."'><input name='flag4' type='checkbox' value='flag4'>richtig</td></tr>
 		</table>
 	<input type='hidden' name='sp-".get_anti_spam_code()."' value='1' />
-	<input name='haftung' type='checkbox' value='haftung' required='true' style='margin-left: 130px;'> Ich habe die <a href=\"haftungsfreistellung.html\" target=\"fenster\" onclick=\"window.open('haftungsfreistellung.html','fenster', 'width=600,height=450,status,resizable,scrollbars')\">Haftungsfreistellung</a> gelesen und akzeptiere diese.<br>
 	<input type='submit' value='Absenden' class='sendbutton'>		 
-</form>"
-
+</form>";
 
 ?>
+  </div>
+  </center>
+</body>
