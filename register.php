@@ -9,7 +9,7 @@ include "connect.php";
   <title>Fragen & Antworten | Registrieren</title>              
 	<link href="style.css" type="text/css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="Fragen und Antwprten, Der Dozent stellt Fragen, die Studenten antworten." />
+	<meta name="description" content="Fragen und Antworten, Der Dozent stellt Fragen, die Studenten antworten." />
 	<meta name="keywords" content="Fragen, Antworten, Quiz, Auswertung, BA-Glauchau" />
 	<meta name="language" content="de, at" />
   </head>  
@@ -29,7 +29,6 @@ if(isset($_GET['register'])) {
 	$realname = $_POST['realname'];
     $passwort = $_POST['passwort'];
     $passwort2 = $_POST['passwort2'];
-	echo $username;
   
     if (strlen($username) < 3) {
 		echo 'Der Nutzername muss mindestens 3 Buchstaben lang sein<br>';
@@ -52,7 +51,9 @@ if(isset($_GET['register'])) {
     
     //Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
     if(!$error) { 
-        $statement = mysqli_query($db, "SELECT * FROM users WHERE username=".$username."");
+        $statement = mysqli_query($db, "SELECT TOP 1 users.username FROM users WHERE users.username=".$username."");
+		var_dump($db);
+		var_dump($statement);
         $result = mysqli_num_rows($statement);
         
         if($result !== 0) {
@@ -65,7 +66,7 @@ if(isset($_GET['register'])) {
     if(!$error) {    
         $passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
         
-        $statement = mysqli_query($db, "INSERT INTO users (username, real_name, passwort, user_group_id) VALUES (".$username.", ".$realname.", ".$password_hash.", 3)");
+        $statement = mysqli_query($db, "INSERT INTO users (username, real_name, password, user_group_id) VALUES (".$username.", ".$realname.", ".$password_hash.", 3)");
         
         if($statement) {        
             echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
@@ -98,6 +99,6 @@ Passwort wiederholen:<br>
 <?php
 } //Ende von if($showFormular)
 ?>
- 
+   </div>
 </body>
 </html>
