@@ -27,8 +27,8 @@ if(isset($_GET['register'])) {
     $error = false;
     $username = $_POST['username'];
 	$realname = $_POST['realname'];
-    $passwort = $_POST['passwort'];
-    $passwort2 = $_POST['passwort2'];
+    $password = $_POST['password'];
+    $password2 = $_POST['password2'];
   
     if (strlen($username) < 3) {
 		echo 'Der Nutzername muss mindestens 3 Buchstaben lang sein<br>';
@@ -40,23 +40,20 @@ if(isset($_GET['register'])) {
 		$error = true;
 	}
 	
-    if(strlen($passwort) == 0) {
+    if(strlen($password) == 0) {
         echo 'Bitte ein Passwort angeben<br>';
         $error = true;
     }
-    if($passwort != $passwort2) {
+    if($password != $password2) {
         echo 'Die Passwörter müssen übereinstimmen<br>';
         $error = true;
     }
     
     //Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
     if(!$error) { 
-        $statement = mysqli_query($db, "SELECT TOP 1 users.username FROM users WHERE users.username=".$username."");
-		var_dump($db);
-		var_dump($statement);
-        $result = mysqli_num_rows($statement);
+        $pruef = mysqli_num_rows(mysqli_query($db, "SELECT * FROM users WHERE username='$username'"));
         
-        if($result !== 0) {
+        if($pruef > 0) {
             echo 'Dieser Username ist bereits vergeben<br>';
             $error = true;
         }    
@@ -64,10 +61,10 @@ if(isset($_GET['register'])) {
     
     //Keine Fehler, wir können den Nutzer registrieren
     if(!$error) {    
-        $passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
-        $statement = mysqli_query($db, "INSERT INTO users (username, real_name, password, user_group_id) VALUES (".$username.", ".$realname.", ".$password_hash.", 3)");
-        
+        $statement = mysqli_query($db, "INSERT INTO users (username, real_name, password, user_group_id) VALUES ('$username', '$realname', '$password_hash', 3)");
+        var_dump($db);
         if($statement) {        
             echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
             $showFormular = false;
@@ -88,10 +85,10 @@ Ihr echter Name:<br>
 <input type="realname" size="40" maxlength="250" name="realname"><br><br>
 
 Dein Passwort:<br>
-<input type="password" size="40"  maxlength="250" name="passwort"><br>
+<input type="password" size="40"  maxlength="250" name="password"><br>
  
 Passwort wiederholen:<br>
-<input type="password" size="40" maxlength="250" name="passwort2"><br><br>
+<input type="password" size="40" maxlength="250" name="password2"><br><br>
  
 <input type="submit" value="Abschicken">
 </form>
