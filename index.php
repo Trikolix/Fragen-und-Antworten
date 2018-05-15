@@ -1,5 +1,30 @@
 <?php 
 include "connect.php";
+
+if (isset($_GET['answered']))
+{
+	$answer = $_POST['Frage'];
+	if (isset($_SESSION['userid']))
+	{
+		$statement = mysqli_query($db, "SELECT * FROM answers WHERE id=".$answer."");
+		$row = mysqli_fetch_object($statement);
+		$question = $row->question_id;
+		$flag = $row->flag;
+		
+		$count = mysqli_num_rows(mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$_SESSION['userid']." AND question_id=".$question.""));
+		if ($count > 0)
+		{
+			//Eintrag in Datenbank bereits vorhanden - ggf. Antwort korrigieren, bis jetzt nur Ausgabe Fehlermeldung
+			echo "Eintrag in Datenbank nicht möglich. Es ist bereits ein Eintrag für die Frage von dem User vorhanden.";
+		}
+		else
+		{
+			//Antwort wird in Datenbank geschrieben
+			$statement = mysqli_query($db, "INSERT INTO given_answers (user_id, question_id, answer_id, flag) VALUES (".$_SESSION['userid'].", ".$question.", ".$answer.", ".$flag.")");
+		}
+		
+	}
+}
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +48,7 @@ include "connect.php";
 	while ($row = mysqli_fetch_object($statement))
 	{
 		$id = $row->id;
-		echo "<form>
+		echo "<form action='?answered=1' method='post'>
 				<p>".$row->question."</p>
 				<fieldset>";
 	}
@@ -32,7 +57,9 @@ include "connect.php";
 	{
 		echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
 	}
-	echo "</fieldset>
+	echo "
+			
+			</fieldset>
 		<center><button>Absenden</button></center>
 	</form>";
 ?>
