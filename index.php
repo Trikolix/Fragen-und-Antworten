@@ -7,7 +7,7 @@ include "connect.php";
   <title>Fragen & Antworten</title>              
 	<link href="style.css" type="text/css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="Fragen und Antwprten, Der Dozent stellt Fragen, die Studenten antworten." />
+	<meta name="description" content="Fragen und Antworten, Der Dozent stellt Fragen, die Studenten antworten." />
 	<meta name="keywords" content="Fragen, Antworten, Quiz, Auswertung, BA-Glauchau" />
 	<meta name="language" content="de, at" />
   </head>  
@@ -20,7 +20,6 @@ include "connect.php";
   <?php
 		
 	$statement = mysqli_query($db, "SELECT * FROM questions ORDER BY RAND() LIMIT 1");
-
 	while ($row = mysqli_fetch_object($statement))
 	{
 		$id = $row->id;

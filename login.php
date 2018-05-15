@@ -6,14 +6,14 @@ if(isset($_GET['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    $statement = mysqli_query($db, "SELECT * FROM users WHERE username=".$username."");
+    $statement = mysqli_query($db, "SELECT * FROM users WHERE username='$username'");
     $row = mysqli_fetch_object($statement);
         
     //Überprüfung des Passworts
-    if ($statement !== false && password_verify($password, $row['password'])) {
-        $_SESSION['userid'] = $user['id'];
-		$_SESSION['rights'] = $user['user_group_id'];
-        die('Login erfolgreich. Weiter zu <a href="geheim.php">internen Bereich</a>');
+    if ($statement !== false && password_verify($password, $row->password)) {
+        $_SESSION['userid'] = $row->id;
+		$_SESSION['rights'] = $row->user_group_id;
+        die('Login erfolgreich. Weiter zu den <a href="index.php">Fragen</a>');
     } else {
         $errorMessage = "E-Mail oder Passwort war ungültig<br>";
     }
