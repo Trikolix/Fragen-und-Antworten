@@ -1,6 +1,5 @@
 <?php 
 include "connect.php";
-
 if (isset($_GET['answered']))
 {
 	$answer = $_POST['Frage'];
@@ -31,6 +30,10 @@ if (isset($_GET['answered']))
 			}
 		}
 		
+	}
+	else
+	{
+		echo "Melden Sie sich bitte erst an um eine Frage beantworten zu können. <a href='login.php'>Hier gehts zum Login.</a><br>";
 	}
 }
 ?>
