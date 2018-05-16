@@ -10,6 +10,10 @@
 	width: -moz-fit-content;
 	text-align: left;
 }
+#error {
+	background-color: red;
+	width: fit-content;	
+}
 fieldset {
 	border: none;
 }
