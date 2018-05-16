@@ -83,7 +83,7 @@ if ($_POST)
 			$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort4."', '".$flag4."' )");
 		
 		
-		$Kontrolle = mysqli_query($db, "SELECT * FROM answers WHERE id=".$question_id."");
+		$Kontrolle = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$question_id."");
 		if ($Kontrolle != null)
 		{
 			echo "<script type='text/javascript'>alert('Ihre Frage wurde erfolgreich erstellt!')</script>";
