@@ -81,6 +81,17 @@ if ($_POST)
 		
 		if (strlen($antwort4) > 0)
 			$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort4."', '".$flag4."' )");
+		
+		
+		$Kontrolle = mysqli_query($db, "SELECT * FROM answers WHERE id=".$question_id."");
+		if ($Kontrolle != null)
+		{
+			echo "<script type='text/javascript'>alert('Ihre Frage wurde erfolgreich erstellt!')</script>";
+		}
+		else 
+		{
+			echo "<script type='text/javascript'>alert('Ihre Frage konnte nicht in die Datenbank geschrieben werden!')</script>";
+		}
 		}
 	}
 }
