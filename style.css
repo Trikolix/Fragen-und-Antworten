@@ -14,6 +14,10 @@
 	background-color: red;
 	width: fit-content;	
 }
+#login {
+	text-align: right;
+    margin-bottom: -20px;
+}
 fieldset {
 	border: none;
 }

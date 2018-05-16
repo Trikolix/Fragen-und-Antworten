@@ -12,6 +12,20 @@ include "connect.php";
 	<meta name="language" content="de, at" />
   </head>  
   <body>
+  <div id="login">
+	<?php
+		if (isset($_SESSION['userid']))
+		{
+			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
+			$row = mysqli_fetch_object($statement);
+			echo "Sie sind eingeloggt als ".$row->username.". | <a href='logout.php'>Ausloggen</a>";
+		}
+		else
+		{
+			echo "<a href='login.php'>Einloggen</a>";
+		}	
+	?>
+  </div>
   <center> 
   <div id="header">
 	Fragen und Antworten
@@ -63,10 +77,15 @@ if ($_POST)
 	if (isset($_POST['flag4']))
 		$flag4 = 1;
 	
+	if (!isset($_SESSION['userid'])){
+		$erfolg = 0;
+		$ausgabe = "Nur eingeloggte Benutzer können neue Fragen anlegen!<br>";
+	}
+		
 	//Eintragen in Datenbank
 	if ($erfolg == 1)
 	{	
-		$abfrage = mysqli_query($db, "INSERT INTO questions (question) values ('".$frage."')");
+		$abfrage = mysqli_query($db, "INSERT INTO questions (question, creator_id) values ('".$frage."', '".$_SESSION['userid']."')");
 		$question_id = mysqli_insert_id($db);
 		
 		if (strlen($antwort1) > 0)
@@ -81,7 +100,7 @@ if ($_POST)
 		
 		if (strlen($antwort4) > 0)
 			$abfrage = mysqli_query($db, "INSERT INTO answers (question_id, answer, flag) values ('".$question_id."', '".$antwort4."', '".$flag4."' )");
-		
+		}
 		
 		$Kontrolle = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$question_id."");
 		if ($Kontrolle != null)
@@ -92,17 +111,16 @@ if ($_POST)
 		{
 			echo "<script type='text/javascript'>alert('Ihre Frage konnte nicht in die Datenbank geschrieben werden!')</script>";
 		}
-		}
 	}
 }
 echo "<form method='post' action='submit_question.php' class='form'>
 	<table class='anmeldung'>
 		<colgroup><col width='180px'><col width='500px'></colgroup>	
-			<tr><td>Frage:</td><td><input name='frage' type='text' required='true' size='60' maxlength='100' value='".$frage."'></td></tr>
-			<tr><td>Antwort 1:</td><td><input name='antwort1' type='text' required='true' maxlength='60' size='35' value='".$antwort1."'><input name='flag1' type='checkbox' value='flag1'>richtig</td></tr>
-			<tr><td>Antwort 2:</td><td><input name='antwort2' type='text' maxlength='60' size='35' value='".$antwort2."'><input name='flag2' type='checkbox' value='flag2'>richtig</td></tr>
-			<tr><td>Antwort 3:</td><td><input name='antwort3' type='text' maxlength='60' size='35' value='".$antwort3."'><input name='flag3' type='checkbox' value='flag3'>richtig</td></tr>
-			<tr><td>Antwort 4:</td><td><input name='antwort4' type='text' maxlength='60' size='35' value='".$antwort4."'><input name='flag4' type='checkbox' value='flag4'>richtig</td></tr>
+			<tr><td>Frage:</td><td><input name='frage' type='text' required='true' size='60' maxlength='100'></td></tr>
+			<tr><td>Antwort 1:</td><td><input name='antwort1' type='text' required='true' maxlength='60' size='35'><input name='flag1' type='checkbox' value='flag1'>richtig</td></tr>
+			<tr><td>Antwort 2:</td><td><input name='antwort2' type='text' maxlength='60' size='35'><input name='flag2' type='checkbox' value='flag2'>richtig</td></tr>
+			<tr><td>Antwort 3:</td><td><input name='antwort3' type='text' maxlength='60' size='35'><input name='flag3' type='checkbox' value='flag3'>richtig</td></tr>
+			<tr><td>Antwort 4:</td><td><input name='antwort4' type='text' maxlength='60' size='35'><input name='flag4' type='checkbox' value='flag4'>richtig</td></tr>
 		</table>
 	<input type='hidden' name='sp-".get_anti_spam_code()."' value='1' />
 	<input type='submit' value='Absenden' class='sendbutton'>		 
