@@ -14,7 +14,7 @@ if (isset($_GET['answered']))
 		if ($count > 0)
 		{
 			//Eintrag in Datenbank bereits vorhanden - ggf. Antwort korrigieren, bis jetzt nur Ausgabe Fehlermeldung
-			echo "Eintrag in Datenbank nicht möglich. Es ist bereits ein Eintrag für die Frage von dem User vorhanden.";
+			$error = "Eintrag in Datenbank nicht möglich. Es ist bereits ein Eintrag für die Frage von dem User vorhanden.";
 		}
 		else
 		{
@@ -33,7 +33,7 @@ if (isset($_GET['answered']))
 	}
 	else
 	{
-		echo "Melden Sie sich bitte erst an um eine Frage beantworten zu können. <a href='login.php'>Hier gehts zum Login.</a><br>";
+		$error = "Melden Sie sich bitte erst an um eine Frage beantworten zu können. <a href='login.php'>Hier gehts zum Login.</a><br>";
 	}
 }
 ?>
@@ -54,6 +54,9 @@ if (isset($_GET['answered']))
   </div>
   <div id="main">
   <?php
+	
+	if (isset($error))
+		echo "<center><div id='error'>".$error."</div></center>";
 		
 	$statement = mysqli_query($db, "SELECT * FROM questions ORDER BY RAND() LIMIT 1");
 	while ($row = mysqli_fetch_object($statement))
