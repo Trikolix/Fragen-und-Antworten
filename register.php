@@ -22,7 +22,7 @@ include "connect.php";
  
 <?php
 $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
- 
+echo '<a href="main.php">zurück</a>';
 if(isset($_GET['register'])) {
     $error = false;
     $username = $_POST['username'];

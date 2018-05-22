@@ -55,7 +55,7 @@ if (isset($_GET['answered']))
   </div>
   <div id="main">
   <?php
-	
+	echo '<a href="main.php">zurück</a>';
 	if (isset($error)){
 		echo "<center><div id='error'>".$error."</div></center>";
 	}

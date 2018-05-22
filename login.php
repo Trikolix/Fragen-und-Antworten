@@ -13,7 +13,7 @@ if(isset($_GET['login'])) {
     if ($statement !== false && password_verify($password, $row->password)) {
         $_SESSION['userid'] = $row->id;
 		$_SESSION['rights'] = $row->user_group_id;
-        die('Login erfolgreich. Weiter zu den <a href="index.php">Fragen</a>');
+        die(header('Location: main.php'));
     } else {
         $errorMessage = "E-Mail oder Passwort war ungültig<br>";
     }

@@ -32,6 +32,7 @@ include "connect.php";
   </div>
   <div id="main">
 <?php 
+echo '<a href="main.php">zurück</a>';
 function get_anti_spam_code(){
 	$anti_spam_value = 234;
 	$anti_spam = (date("dmy", time())) + $anti_spam_value;
