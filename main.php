@@ -14,6 +14,20 @@ include "connect.php";
 	<meta name="language" content="de, at" />
   </head>  
   <body>
+  <div id="login">
+	<?php
+		if (isset($_SESSION['userid']))
+		{
+			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
+			$row = mysqli_fetch_object($statement);
+			echo "Sie sind eingeloggt als ".$row->username.". | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+		}
+		else
+		{
+			echo "<a href='login.php'>Einloggen</a>";
+		}	
+	?>
+  </div>
   <center> 
   <div id="header">
 	Fragen und Antworten
