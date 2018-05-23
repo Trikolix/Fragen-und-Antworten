@@ -1,18 +1,17 @@
 #header {
 	font-size: x-large;
 	background-color: greenyellow;
-	width: -moz-fit-content;
-	height: -moz-fit-content;
+	display: table;	
 	padding: 2%;
 	border-radius: 5px;
 }
 #main {
-	width: -moz-fit-content;
+	display: table;	
 	text-align: left;
 }
 #error {
 	background-color: red;
-	width: fit-content;	
+	display: table;	
 }
 #login {
 	text-align: right;
