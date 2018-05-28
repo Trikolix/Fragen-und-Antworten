@@ -1,0 +1,83 @@
+<?php 
+
+include "connect.php";
+
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <title>Fragen & Antworten | Registrieren</title>              
+	<link href="style.css" type="text/css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Fragen und Antworten, Der Dozent stellt Fragen, die Studenten antworten." />
+	<meta name="keywords" content="Fragen, Antworten, Quiz, Auswertung, BA-Glauchau" />
+	<meta name="language" content="de, at" />
+  </head>  
+  <body>
+  <div id="login">
+	<?php
+		if (isset($_SESSION['userid']))
+		{
+			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
+			$row = mysqli_fetch_object($statement);
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username.".</a> | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+		}
+		else
+		{
+			echo "<a href='login.php'>Einloggen</a>";
+		}	
+	?>
+  </div>
+  <center> 
+  <div id="header">
+	Fragen und Antworten
+  </div>
+  <div id="main">
+  <?php
+  //ID Der Frage wird über Link mitgegeben
+  $questionID = $_GET["question"];
+  
+  $question = mysqli_fetch_object(mysqli_query($db, "SELECT * FROM questions WHERE id=".$questionID.""));
+  if($question->creator_id != $_SESSION['userid'])
+  {
+	  echo "Nur der Ersteller der Frage, darf die Statistiken zu der Frage einsehen!";
+  }
+  else
+  {
+	//Auswertung und Statistik über Frage
+	
+	$allAnswers = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$questionID."");
+	$totalAnswers = mysqli_num_rows(mysqli_query($db, "SELECT * FROM given_answers WHERE question_id=".$questionID.""));
+	
+	echo "<h3>Frage</h3>
+			".$question->question."<br><br>";
+	echo "<i>Diese Frage wurde von </i><b>".$totalAnswers." Person(en) </b><i> beantwortet.</i><br><br>";
+
+	echo "<table>
+			<tr>
+				<th>Antwort</th>
+				<th>richtig / falsch</th>
+				<th>Wie oft getippt?</th>
+			</tr>";
+	while ($singleAnswer = mysqli_fetch_object($allAnswers))
+	{
+		$timesAnswered = mysqli_num_rows(mysqli_query($db, "SELECT * FROM given_answers WHERE answer_id=".$singleAnswer->id.""));
+		echo "<tr>
+				<td>".$singleAnswer->answer."</td>
+				<td>".$singleAnswer->flag."</td>
+				<td>".$timesAnswered."</td>
+			  </tr>";
+	}
+	echo "</table>";
+	
+	//TODO: folgende Funktionen einbauen
+	echo "<h3>Aktionen (TO DO)</h3>
+	Löschen<br>
+	Bearbeiten<br>
+	Beenden<br>";
+  }
+  
+  ?>
+  </div>
+  </center>
+</body>
