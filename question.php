@@ -24,7 +24,7 @@ include "connect.php";
 		}
 		else
 		{
-			echo "<a href='login.php'>Einloggen</a> | <a href='register.php'>Registrieren</a>";
+			echo "<a href='login.php'>Einloggen</a>";
 		}	
 	?>
   </div>
@@ -53,6 +53,15 @@ include "connect.php";
 	
 	echo "<h3>Frage</h3>
 			".$question->question."<br><br>";
+	echo "Erstellt am: <b>".$question->creation_time."</b> Beendet: <b>";
+	if ($question->end_time == NULL)
+	{
+		echo "noch nicht</b><br><br>";
+	}
+	else
+	{
+		echo $question->end_time."</b><br><br>";
+	}
 	echo "<i>Diese Frage wurde von </i><b>".$totalAnswers." Person(en) </b><i> beantwortet.</i><br><br>";
 
 	echo "<table>
