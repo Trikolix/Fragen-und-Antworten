@@ -39,7 +39,14 @@ include "connect.php";
   //ID Der Frage wird über Link mitgegeben
   $questionID = $_GET["question"];
   $action = $_GET["action"];
-  $submit = $_GET["submit"];
+  if (isset($_GET["submit"]))
+  {
+	  $submit = $_GET["submit"];
+  }
+  else
+  {
+	  $submit = 0;
+  }
   
   $question = mysqli_fetch_object(mysqli_query($db, "SELECT * FROM questions WHERE id=".$questionID.""));
   if(($question->creator_id != $_SESSION['userid']) AND ($_SESSION['rights'] > 2))
@@ -52,12 +59,17 @@ include "connect.php";
 	  case "delete": 
 		  if ($submit != 1)
 		  {
-			echo "Wollen Sie die Frage <i>".$question->question."</i> wirklich löschen?<br>
-				  <a href='edit_question?question=".$questionID."&action=".$action."&submit=1'>Ja jetzt löschen</a> !Achtung kann nicht rückgängig gemacht werden!";
+			echo "Wollen Sie die Frage \"<i>".$question->question."</i>\" wirklich löschen?<br>
+				  <a href='edit_question.php?question=".$questionID."&action=".$action."&submit=1'>Ja jetzt löschen</a> !Achtung kann nicht rückgängig gemacht werden!";
 		  }
 		  else
 		  {
 			  //Hier wird Fragae inklusive aller Antwortmöglichkeiten gelöscht.
+			  $delete = mysqli_query($db, "DELETE FROM given_answers WHERE question_id=".$questionID."");
+			  $delete = mysqli_query($db, "DELETE FROM answers WHERE question_id=".$questionID."");
+			  $delete = mysqli_query($db, "DELETE FROM questions WHERE id=".$questionID."");
+			  var_dump($delete);
+			  echo "Die Frage wurde erfolgreich gelöscht.";
 		  }	  
 		break;
 	  case "change": break;

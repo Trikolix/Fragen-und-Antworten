@@ -20,7 +20,7 @@ include "connect.php";
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username.".</a> | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
@@ -34,13 +34,15 @@ include "connect.php";
   </div>
   <div id="main">
   <?php
+  
+  echo "<a href='main.php'>zurück</a>";
   //ID Der Frage wird über Link mitgegeben
   $questionID = $_GET["question"];
   
   $question = mysqli_fetch_object(mysqli_query($db, "SELECT * FROM questions WHERE id=".$questionID.""));
-  if($question->creator_id != $_SESSION['userid'])
+  if(($question->creator_id != $_SESSION['userid']) AND ($_SESSION['rights'] > 2))
   {
-	  echo "Nur der Ersteller der Frage, darf die Statistiken zu der Frage einsehen!";
+	  echo "Nur der Ersteller der Frage oder ein Admin, darf die Statistiken zu der Frage einsehen!";
   }
   else
   {
@@ -72,7 +74,7 @@ include "connect.php";
 	
 	//TODO: folgende Funktionen einbauen
 	echo "<h3>Aktionen (TO DO)</h3>
-	Löschen<br>
+	<a href='edit_question.php?question=".$questionID."&action=delete'>Löschen</a><br>
 	Bearbeiten<br>
 	Beenden<br>";
   }
