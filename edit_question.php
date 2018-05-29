@@ -68,12 +68,24 @@ include "connect.php";
 			  $delete = mysqli_query($db, "DELETE FROM given_answers WHERE question_id=".$questionID."");
 			  $delete = mysqli_query($db, "DELETE FROM answers WHERE question_id=".$questionID."");
 			  $delete = mysqli_query($db, "DELETE FROM questions WHERE id=".$questionID."");
-			  var_dump($delete);
 			  echo "Die Frage wurde erfolgreich gelöscht.";
 		  }	  
 		break;
 	  case "change": break;
-	  case "end": break;
+	  case "end": 
+		if ($submit != 1)
+		  {
+			echo "Wollen Sie die Frage \"<i>".$question->question."</i>\" wirklich beenden?<br>
+					Leute können dann nicht mehr auf die Frage antworten, Sie können allerdings immer noch die Statistiken dazu einsehen.<br>
+					<a href='edit_question.php?question=".$questionID."&action=".$action."&submit=1'>Ja jetzt beenden</a>";
+		  }
+		  else
+		  {
+			  //Hier wird Fragae inklusive aller Antwortmöglichkeiten gelöscht.
+			  $end = mysqli_query($db, "UPDATE questions SET end_time=CURRENT_TIMESTAMP WHERE id=".$questionID."");
+			  echo "Die Frage wurde erfolgreich gelöscht.";
+		  }	 
+	  break;
 	  default: 
 		echo "Da trat wohl ein Fehler auf.<a href='question.php?question=".$questionID."'>Zurück</a>";
 		break;

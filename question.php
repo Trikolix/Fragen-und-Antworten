@@ -76,7 +76,7 @@ include "connect.php";
 	echo "<h3>Aktionen (TO DO)</h3>
 	<a href='edit_question.php?question=".$questionID."&action=delete'>Löschen</a><br>
 	Bearbeiten<br>
-	Beenden<br>";
+	<a href='edit_question.php?question=".$questionID."&action=end'>Beenden</a><br>";
   }
   
   ?>
