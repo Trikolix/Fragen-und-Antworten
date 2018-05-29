@@ -59,7 +59,7 @@ if (isset($_GET['answered']))
 		}
 		else
 		{
-			echo "<a href='login.php'>Einloggen</a>";
+			echo "<a href='login.php'>Einloggen</a> | <a href='register.php'>Registrieren</a>";
 		}	
 	?>
   </div>
