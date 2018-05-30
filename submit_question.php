@@ -18,7 +18,7 @@ include "connect.php";
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als ".$row->username.". | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
@@ -80,6 +80,7 @@ if ($_POST)
 	
 	if (!isset($_SESSION['userid'])){
 		$erfolg = 0;
+		echo "<script type='text/javascript'>alert('Nur eingeloggte Benutzer können neue Fragen anlegen!')</script>";
 		$ausgabe = "Nur eingeloggte Benutzer können neue Fragen anlegen!<br>";
 	}
 		

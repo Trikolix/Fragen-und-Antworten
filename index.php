@@ -55,7 +55,7 @@ if (isset($_GET['answered']))
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username.".</a> | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
@@ -83,6 +83,7 @@ if (isset($_GET['answered']))
 												SELECT question_id
 												FROM `given_answers` 
 												WHERE user_id = ".$_SESSION['userid'].") 
+											AND end_time IS NULL
 											ORDER BY RAND() LIMIT 1");
 		$question_count = mysqli_num_rows($get_question);
 		if($question_count > 0){
@@ -101,20 +102,21 @@ if (isset($_GET['answered']))
 					{
 						echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
 					}
+					echo "
+							</fieldset>
+							<center><button>Absenden</button></center>
+							</form>";
 				} else {
 					echo "Es konnten keine Antworten zu dieser Frage gefunden werden.";
 				}
 			} else {
-				echo "Es konnten keine Frage gefunden werden.";
+				echo "<br>Es konnten keine Frage gefunden werden.";
 			}
 		} else {
-			echo "Es wurden bereits alle Fragen beantwortet.";
+			echo "<br>Es wurden bereits alle Fragen beantwortet.";
 		}
 		
-		echo "
-				</fieldset>
-			<center><button>Absenden</button></center>
-		</form>";
+		
 	}
 	else
 	{
