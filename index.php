@@ -2,8 +2,6 @@
 include "connect.php";
 if (isset($_GET['answered']))
 {
-	
-	
 	if (isset($_SESSION['userid']))
 	{
 		if (isset($_POST['Frage'])){
@@ -55,7 +53,7 @@ if (isset($_GET['answered']))
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
@@ -65,7 +63,9 @@ if (isset($_GET['answered']))
   </div>
   <center> 
   <div id="header">
-	Fragen und Antworten
+	<a href='main.php'>
+		Fragen und Antworten
+	</a>
   </div>
   <div id="main">
   <?php
@@ -83,43 +83,43 @@ if (isset($_GET['answered']))
 												SELECT question_id
 												FROM `given_answers` 
 												WHERE user_id = ".$_SESSION['userid'].") 
-											AND end_time IS NULL
-											ORDER BY RAND() LIMIT 1");
-		$question_count = mysqli_num_rows($get_question);
-		if($question_count > 0){
-			while ($row = mysqli_fetch_object($get_question))
-			{
-				$id = $row->id;
-				echo "<form action='?answered=1' method='post'>
-						<p>".$row->question."</p>
-						<fieldset>";
-			}
-			if ($id != ''){
-				$get_answers = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$id." ORDER BY RAND()");
-				$answer_count = mysqli_num_rows($get_answers);
-				if ($answer_count > 0){
-					while ($row = mysqli_fetch_object($get_answers))
-					{
-						echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
+												AND end_time IS NULL
+												ORDER BY RAND() LIMIT 1");
+		if ($get_question){
+			$question_count = mysqli_num_rows($get_question);
+			if($question_count > 0){
+				while ($row = mysqli_fetch_object($get_question))
+				{
+					$id = $row->id;
+					echo "<form action='?answered=1' method='post'>
+							<p>".$row->question."</p>
+							<fieldset>";
+				}
+				if ($id != ''){
+					$get_answers = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$id." ORDER BY RAND()");
+					$answer_count = mysqli_num_rows($get_answers);
+					if ($answer_count > 0){
+						while ($row = mysqli_fetch_object($get_answers))
+						{
+							echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
+						}
+						echo "
+								</fieldset>
+								<center><button>Absenden</button></center>
+								</form>";
+					} else {
+						echo "Es konnten keine Antworten zu dieser Frage gefunden werden.";
 					}
-					echo "
-							</fieldset>
-							<center><button>Absenden</button></center>
-							</form>";
 				} else {
-					echo "Es konnten keine Antworten zu dieser Frage gefunden werden.";
+					echo "<br>Es konnten keine Frage gefunden werden.";
 				}
 			} else {
-				echo "<br>Es konnten keine Frage gefunden werden.";
+				echo "<br>Es wurden bereits alle Fragen beantwortet.";
 			}
 		} else {
 			echo "<br>Es wurden bereits alle Fragen beantwortet.";
 		}
-		
-		
-	}
-	else
-	{
+	} else {
 		echo "<center><br>Loggen Sie sich bitte erst ein um fragen beantworten zu können.<br>
 		<a href='login.php'>Login</a></center>";
 	}

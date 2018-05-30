@@ -14,15 +14,31 @@ include "connect.php";
 	<meta name="language" content="de, at" />
   </head>  
   <body>
+  <div id="login">
+	<?php
+		if (isset($_SESSION['userid']))
+		{
+			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
+			$row = mysqli_fetch_object($statement);
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='logout.php'>Ausloggen</a>";
+		}
+		else
+		{
+			echo "<a href='login.php'>Einloggen</a> | <a href='register.php'>Registrieren</a>";
+		}	
+	?>
+  </div>
   <center> 
   <div id="header">
-	Fragen und Antworten
+	<a href="main.php">
+		Fragen und Antworten
+	</a>
   </div>
   <div id="main">
  
 <?php
 $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
-echo '<a href="main.php">zurück</a>';
+echo '<br>';
 if(isset($_GET['register'])) {
     $error = false;
     $username = $_POST['username'];
@@ -64,7 +80,6 @@ if(isset($_GET['register'])) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
         $statement = mysqli_query($db, "INSERT INTO users (username, real_name, password, user_group_id) VALUES ('$username', '$realname', '$password_hash', 3)");
-        var_dump($db);
         if($statement) {        
             echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
             $showFormular = false;

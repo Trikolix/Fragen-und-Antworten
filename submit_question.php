@@ -18,7 +18,7 @@ include "connect.php";
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
@@ -28,11 +28,13 @@ include "connect.php";
   </div>
   <center> 
   <div id="header">
-	Fragen und Antworten
+	<a href="main.php">
+		Fragen und Antworten
+	</a>
   </div>
   <div id="main">
 <?php 
-echo '<a href="main.php">zurück</a>';
+echo '<br>';
 function get_anti_spam_code(){
 	$anti_spam_value = 234;
 	$anti_spam = (date("dmy", time())) + $anti_spam_value;

@@ -20,7 +20,7 @@ include "connect.php";
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='submit_question.php'>Frage einreichen</a> | <a href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
@@ -41,25 +41,31 @@ if (isset($_SESSION['userid']))
 		$correctAnswers = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid." AND flag = 1");
 		$incorrectAnswers = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid." AND flag = 0");
 		$ownQuestions = mysqli_Query($db, "SELECT * FROM questions WHERE creator_id=".$userid."");
+		if ($ownQuestions){
+			$NumberOwnQuestions = mysqli_num_rows($ownQuestions);
+		}
 	
 
 	echo "	<h3>Deine Statistik</h3>
 			Sie haben ".mysqli_num_rows($questionAll)." Fragen beantwortet.<br>
 			Sie haben ".mysqli_num_rows($correctAnswers)." richtig beantwortet.<br>
-			Sie haben ".mysqli_num_rows($incorrectAnswers)." falsch beantwortet.<br>
-			<h3>Deine Fragen</h3>";
+			Sie haben ".mysqli_num_rows($incorrectAnswers)." falsch beantwortet.<br>";
 			
-	while ($question = mysqli_fetch_object($ownQuestions))
-	{
-		echo "<a href='question.php?question=".$question->id."'>".$question->question."</a><br>";
-	}
-		
+	echo "	<h3>Aktionen</h3>
+			<a href='index.php'>Fragen beantworten</a><br>
+			<a href='register.php'>Nutzer anlegen</a><br>
+			<a href='submit_question.php'>Fragen anlegen</a>";
+			
+	if ($NumberOwnQuestions > 0){
+		echo "  <h3>Deine Fragen</h3>";
+		while ($question = mysqli_fetch_object($ownQuestions))
+		{
+			echo "<a href='question.php?question=".$question->id."'>".$question->question."</a><br>";
+		}
+	} 	
 }
 
-echo "	<h3>Aktionen</h3>
-		<a href='index.php'>Fragen beantworten</a><br>
-		<a href='register.php'>Nutzer anlegen</a><br>
-		<a href='submit_question.php'>Fragen anlegen</a>";
+
 ?>
   </div>
   </center>
