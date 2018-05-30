@@ -24,7 +24,7 @@ include "connect.php";
 		}
 		else
 		{
-			echo "<a href='login.php'>Einloggen</a> | <a href='register.php'>Registrieren</a>";
+			echo "<a href='login.php'>Einloggen</a>";
 		}	
 	?>
   </div>
@@ -35,7 +35,7 @@ include "connect.php";
   <div id="main">
   <?php
   
-  echo "<a href='main.php'>zurück</a><br>";
+  
   //ID Der Frage wird über Link mitgegeben
   $questionID = $_GET["question"];
   $action = $_GET["action"];
@@ -68,7 +68,8 @@ include "connect.php";
 			  $delete = mysqli_query($db, "DELETE FROM given_answers WHERE question_id=".$questionID."");
 			  $delete = mysqli_query($db, "DELETE FROM answers WHERE question_id=".$questionID."");
 			  $delete = mysqli_query($db, "DELETE FROM questions WHERE id=".$questionID."");
-			  echo "Die Frage wurde erfolgreich gelöscht.";
+			  echo "Die Frage wurde erfolgreich gelöscht.<br>";
+			  echo "<a href='main.php'>zurück</a><br>";
 		  }	  
 		break;
 	  case "change": break;
@@ -81,9 +82,10 @@ include "connect.php";
 		  }
 		  else
 		  {
-			  //Hier wird Fragae inklusive aller Antwortmöglichkeiten gelöscht.
+			  //Hier wird Frage beendet.
 			  $end = mysqli_query($db, "UPDATE questions SET end_time=CURRENT_TIMESTAMP WHERE id=".$questionID."");
-			  echo "Die Frage wurde erfolgreich gelöscht.";
+			  echo "Die Frage wurde erfolgreich beendet.<br>";
+			  echo "<a href='question.php?question=".$questionID."'>Zurück</a>";
 		  }	 
 	  break;
 	  default: 

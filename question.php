@@ -66,7 +66,7 @@ include "connect.php";
 
 	echo "<table>
 			<tr>
-				<th>Antwort</th>
+				<th>Antworten</th>
 				<th>richtig / falsch</th>
 				<th>Wie oft getippt?</th>
 			</tr>";
@@ -84,10 +84,12 @@ include "connect.php";
 	//TODO: folgende Funktionen einbauen
 	echo "<h3>Aktionen (TO DO)</h3>
 	<a href='edit_question.php?question=".$questionID."&action=delete'>Löschen</a><br>
-	Bearbeiten<br>
-	<a href='edit_question.php?question=".$questionID."&action=end'>Beenden</a><br>";
+	Bearbeiten<br>";
+	if ($question->end_time == NULL)
+	{
+		echo "<a href='edit_question.php?question=".$questionID."&action=end'>Beenden</a><br>";
+	}
   }
-  
   ?>
   </div>
   </center>
