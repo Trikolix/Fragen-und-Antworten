@@ -29,19 +29,20 @@ label::after {
 }
 .Menuelink {	
 	text-decoration: none;
-	color: #800000;
+	color: black;
 	font-weight: bolder;
 	font-size: 18px;
 	font-style: normal;
 	line-height: 35px;
 }
 .Menuelink:hover {
-	color: black;
+	color: #800000;
 }
 .Headerlink {
 	text-decoration: none;
 	color: #800000;
 	font-weight: bolder;
+	font-size: 35px;
 }
 .Headerlink:hover {
 	color: black;

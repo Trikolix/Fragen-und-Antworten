@@ -18,7 +18,7 @@ include "connect.php";
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als <a class='Menuelink' href='main.php'>".$row->username."</a>. | <a class='Menuelink' href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a class='Menuelink' href='main.php'>".$row->username."</a> | <a class='Menuelink' href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
