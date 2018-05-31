@@ -23,11 +23,11 @@ if (isset($_GET['answered']))
 				$statement = mysqli_query($db, "INSERT INTO given_answers (user_id, question_id, answer_id, flag) VALUES (".$_SESSION['userid'].", ".$question.", ".$answer.", ".$flag.")");
 				if ($flag == 1)
 				{
-					echo "<script type='text/javascript'>alert('Deine Antwort ist richtig!')</script>";
+					$success = "Deine Antwort war richtig!";
 				}
 				else 
 				{
-					echo "<script type='text/javascript'>alert('Deine Antwort ist falsch!')</script>";
+					$error = "Deine Antwort war leider falsch!<br>";
 				}
 			}
 		}
@@ -72,6 +72,9 @@ if (isset($_GET['answered']))
 	
 	if (isset($error)){
 		echo "<center><div id='error'>".$error."</div></center>";
+	}
+	if (isset($success)){
+		echo "<center><div id='success'>".$success."</div></center>";
 	}
 	
 	$id = '';	

@@ -13,6 +13,10 @@
 	background-color: red;
 	display: table;	
 }
+#success {
+	background-color: #00ff00;
+	display: table;	
+}
 #login {
 	text-align: right;
     margin: -8px;
