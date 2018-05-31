@@ -109,7 +109,9 @@ if ($_POST)
 		$Kontrolle = mysqli_query($db, "SELECT * FROM answers WHERE question_id=".$question_id."");
 		if ($Kontrolle != null)
 		{
-			echo "<script type='text/javascript'>alert('Ihre Frage wurde erfolgreich erstellt!')</script>";
+			echo "<center><br>Ihre Frage wurde erfolgreich erstellt!<br>
+			<a href='question.php?question=".$question_id."'>Zur Frage</a><br>
+			<a href='submit_question.php'>Weitere Frage anlegen</a></center>";
 		}
 		else 
 		{
@@ -117,19 +119,21 @@ if ($_POST)
 		}
 	}
 }
-echo "<form method='post' action='submit_question.php' class='form'>
-	<table class='anmeldung'>
-		<colgroup><col width='180px'><col width='500px'></colgroup>	
-			<tr><td>Frage:</td><td><input name='frage' type='text' required='true' size='60' maxlength='100'></td></tr>
-			<tr><td>Antwort 1:</td><td><input name='antwort1' type='text' required='true' maxlength='60' size='35'><input name='flag1' type='checkbox' value='flag1'>richtig</td></tr>
-			<tr><td>Antwort 2:</td><td><input name='antwort2' type='text' maxlength='60' size='35'><input name='flag2' type='checkbox' value='flag2'>richtig</td></tr>
-			<tr><td>Antwort 3:</td><td><input name='antwort3' type='text' maxlength='60' size='35'><input name='flag3' type='checkbox' value='flag3'>richtig</td></tr>
-			<tr><td>Antwort 4:</td><td><input name='antwort4' type='text' maxlength='60' size='35'><input name='flag4' type='checkbox' value='flag4'>richtig</td></tr>
-		</table>
-	<input type='hidden' name='sp-".get_anti_spam_code()."' value='1' />
-	<input type='submit' value='Absenden' class='sendbutton'>		 
-</form>";
-
+else
+{
+	echo "<form method='post' action='submit_question.php' class='form'>
+		<table class='anmeldung'>
+			<colgroup><col width='180px'><col width='500px'></colgroup>	
+				<tr><td>Frage:</td><td><input name='frage' type='text' required='true' size='60' maxlength='100'></td></tr>
+				<tr><td>Antwort 1:</td><td><input name='antwort1' type='text' required='true' maxlength='60' size='35'><input name='flag1' type='checkbox' value='flag1'>richtig</td></tr>
+				<tr><td>Antwort 2:</td><td><input name='antwort2' type='text' maxlength='60' size='35'><input name='flag2' type='checkbox' value='flag2'>richtig</td></tr>
+				<tr><td>Antwort 3:</td><td><input name='antwort3' type='text' maxlength='60' size='35'><input name='flag3' type='checkbox' value='flag3'>richtig</td></tr>
+				<tr><td>Antwort 4:</td><td><input name='antwort4' type='text' maxlength='60' size='35'><input name='flag4' type='checkbox' value='flag4'>richtig</td></tr>
+			</table>
+		<input type='hidden' name='sp-".get_anti_spam_code()."' value='1' />
+		<input type='submit' value='Absenden' class='sendbutton'>		 
+	</form>";
+}
 ?>
   </div>
   </center>
