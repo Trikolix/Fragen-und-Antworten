@@ -84,9 +84,8 @@ include "connect.php";
 	echo "</table>";
 	
 	//TODO: folgende Funktionen einbauen
-	echo "<h3>Aktionen (TO DO)</h3>
-	<a href='edit_question.php?question=".$questionID."&action=delete'>Löschen</a><br>
-	Bearbeiten<br>";
+	echo "<h3>Aktionen</h3>
+	<a href='edit_question.php?question=".$questionID."&action=delete'>Löschen</a><br>";
 	if ($question->end_time == NULL)
 	{
 		echo "<a href='edit_question.php?question=".$questionID."&action=end'>Beenden</a><br>";
