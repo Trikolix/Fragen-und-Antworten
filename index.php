@@ -69,7 +69,7 @@ if (isset($_GET['answered']))
   </div>
   <div id="main">
   <?php
-	
+	echo "<a class='Menuelink' href='main.php'>Zurück</a>";
 	if (isset($error)){
 		echo "<center><div id='error'>".$error."</div></center>";
 	}
@@ -120,7 +120,7 @@ if (isset($_GET['answered']))
 				echo "<br>Es wurden bereits alle Fragen beantwortet.<br><center><a class='Menuelink' href='main.php'>Zurück</a></center>";
 			}
 		} else {
-			echo "<br>Es wurden bereits alle Fragen beantwortet.";
+			echo "<br>Es wurden bereits alle Fragen beantwortet.<br><center><a class='Menuelink' href='main.php'>Zurück</a></center>";
 		}
 	} else {
 		echo "<center><br>Loggen Sie sich bitte erst ein um fragen beantworten zu können.<br>
