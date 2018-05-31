@@ -37,7 +37,7 @@ include "connect.php";
   <div id="main">
   <?php
   
-  echo "<br>";
+  echo "<a class='Menuelink' href='main.php'>Zurück</a><br>";
   //ID Der Frage wird über Link mitgegeben
   $questionID = $_GET["question"];
   

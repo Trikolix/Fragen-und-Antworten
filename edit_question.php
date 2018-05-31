@@ -61,8 +61,10 @@ include "connect.php";
 	  case "delete": 
 		  if ($submit != 1)
 		  {
-			echo "Wollen Sie die Frage \"<i>".$question->question."</i>\" wirklich löschen?<br>
-				  <a href='edit_question.php?question=".$questionID."&action=".$action."&submit=1'>Ja jetzt löschen</a> !Achtung kann nicht rückgängig gemacht werden!";
+			echo "<a class='Menuelink' href='question.php?question=".$questionID."'>Zurück</a><br>
+			<br>Wollen Sie die Frage \"<i>".$question->question."</i>\" wirklich löschen?<br>
+				  <center><a class='Menuelink' href='edit_question.php?question=".$questionID."&action=".$action."&submit=1'>Ja, jetzt löschen</a></center> <br>
+				  <b>Achtung:</b> kann nicht rückgängig gemacht werden!";
 		  }
 		  else
 		  {
@@ -78,9 +80,12 @@ include "connect.php";
 	  case "end": 
 		if ($submit != 1)
 		  {
-			echo "Wollen Sie die Frage \"<i>".$question->question."</i>\" wirklich beenden?<br>
-					Leute können dann nicht mehr auf die Frage antworten, Sie können allerdings immer noch die Statistiken dazu einsehen.<br>
-					<a href='edit_question.php?question=".$questionID."&action=".$action."&submit=1'>Ja jetzt beenden</a>";
+			echo "
+			<a class='Menuelink' href='question.php?question=".$questionID."'>Zurück</a><br>
+			<br>Wollen Sie die Frage \"<i>".$question->question."</i>\" wirklich beenden?<br>
+					Leute können dann nicht mehr auf die Frage antworten.<br>
+					Sie können allerdings immer noch die Statistiken dazu einsehen.<br>
+					<center><a class='Menuelink' href='edit_question.php?question=".$questionID."&action=".$action."&submit=1'>Ja, jetzt beenden</a></center>";
 		  }
 		  else
 		  {
