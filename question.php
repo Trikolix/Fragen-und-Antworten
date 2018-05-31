@@ -70,16 +70,26 @@ include "connect.php";
 			<tr>
 				<th>Antworten</th>
 				<th>richtig / falsch</th>
-				<th>Wie oft getippt?</th>
+				<th align='center'>Wie oft getippt?</th>
+				<th align='right'>%</th>
 			</tr>";
 	while ($singleAnswer = mysqli_fetch_object($allAnswers))
 	{
 		$timesAnswered = mysqli_num_rows(mysqli_query($db, "SELECT * FROM given_answers WHERE answer_id=".$singleAnswer->id.""));
 		echo "<tr>
 				<td>".$singleAnswer->answer."</td>
-				<td>".$singleAnswer->flag."</td>
-				<td>".$timesAnswered."</td>
-			  </tr>";
+				<td align='center'>".$singleAnswer->flag."</td>
+				<td align='center'>".$timesAnswered."</td>";
+		if ($timesAnswered > 0)
+		{
+			echo "<td align='right'>".($timesAnswered/$totalAnswers*100)."%</td>
+			</tr>";
+		}
+		else
+		{
+			echo "<td align='right'>0%</td>
+			</tr>";
+		}
 	}
 	echo "</table>";
 	
