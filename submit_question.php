@@ -121,6 +121,7 @@ if ($_POST)
 }
 else
 {
+	echo "<a class='Menuelink' href='main.php'>Zurück</a><br>";
 	echo "<form method='post' action='submit_question.php' class='form'>
 		<table class='anmeldung'>
 			<colgroup><col width='180px'><col width='500px'></colgroup>	
