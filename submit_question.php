@@ -18,17 +18,17 @@ include "connect.php";
 		{
 			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
 			$row = mysqli_fetch_object($statement);
-			echo "Sie sind eingeloggt als <a href='main.php'>".$row->username."</a>. | <a href='logout.php'>Ausloggen</a>";
+			echo "Sie sind eingeloggt als <a class='Menuelink' href='main.php'>".$row->username."</a>. | <a class='Menuelink' href='logout.php'>Ausloggen</a>";
 		}
 		else
 		{
-			echo "<a href='login.php'>Einloggen</a> | <a href='register.php'>Registrieren</a>";
+			echo "<a class='Menuelink' href='login.php'>Einloggen</a> | <a class='Menuelink' href='register.php'>Registrieren</a>";
 		}	
 	?>
   </div>
   <center> 
   <div id="header">
-	<a href="main.php">
+	<a class='Headerlink' href='main.php'>
 		Fragen und Antworten
 	</a>
   </div>

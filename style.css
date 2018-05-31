@@ -1,6 +1,6 @@
 #header {
 	font-size: x-large;
-	background-color: greenyellow;
+	background-color: lightgrey;
 	display: table;	
 	padding: 2%;
 	border-radius: 5px;
@@ -15,7 +15,9 @@
 }
 #login {
 	text-align: right;
-    margin-bottom: -20px;
+    margin: -10px;
+	padding: 5px;
+	background-color: lightgrey;
 }
 fieldset {
 	border: none;
@@ -24,4 +26,23 @@ fieldset {
 label::after {
 	content: "";
 	display: block;
+}
+.Menuelink {	
+	text-decoration: none;
+	color: #800000;
+	font-weight: bolder;
+	font-size: 18px;
+	font-style: normal;
+	line-height: 35px;
+}
+.Menuelink:hover {
+	color: black;
+}
+.Headerlink {
+	text-decoration: none;
+	color: #800000;
+	font-weight: bolder;
+}
+.Headerlink:hover {
+	color: black;
 }

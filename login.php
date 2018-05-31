@@ -31,9 +31,25 @@ if(isset($_GET['login'])) {
 	<meta name="language" content="de, at" />
   </head>  
   <body>
+  <div id="login">
+	<?php
+		if (isset($_SESSION['userid']))
+		{
+			$statement = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['userid']."");
+			$row = mysqli_fetch_object($statement);
+			echo "Sie sind eingeloggt als <a class='Menuelink' href='main.php'>".$row->username."</a>. | <a class='Menuelink' href='logout.php'>Ausloggen</a>";
+		}
+		else
+		{
+			echo "<a class='Menuelink' href='login.php'>Einloggen</a> | <a class='Menuelink' href='register.php'>Registrieren</a>";
+		}	
+	?>
+  </div>
   <center> 
   <div id="header">
-	Fragen und Antworten
+	<a class='Headerlink' href="main.php">
+		Fragen und Antworten
+	</a>
   </div>
   <div id="main">
 <?php 
