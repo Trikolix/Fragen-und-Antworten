@@ -37,15 +37,15 @@ include "connect.php";
   <div id="main">
 <?php 
 if (isset($_SESSION['userid']))
-	{
-		$userid = $_SESSION['userid'];
-		$questionAll = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid."");
-		$correctAnswers = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid." AND flag = 1");
-		$incorrectAnswers = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid." AND flag = 0");
-		$ownQuestions = mysqli_Query($db, "SELECT * FROM questions WHERE creator_id=".$userid."");
-		if ($ownQuestions){
-			$NumberOwnQuestions = mysqli_num_rows($ownQuestions);
-		}
+{
+	$userid = $_SESSION['userid'];
+	$questionAll = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid."");
+	$correctAnswers = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid." AND flag = 1");
+	$incorrectAnswers = mysqli_query($db, "SELECT * FROM given_answers WHERE user_id=".$userid." AND flag = 0");
+	$ownQuestions = mysqli_Query($db, "SELECT * FROM questions WHERE creator_id=".$userid."");
+	if ($ownQuestions){
+		$NumberOwnQuestions = mysqli_num_rows($ownQuestions);
+	}
 	
 
 	echo "	<h3>Deine Statistik</h3>
@@ -65,6 +65,13 @@ if (isset($_SESSION['userid']))
 			echo "<a href='question.php?question=".$question->id."'>".$question->question."</a><br>";
 		}
 	} 	
+}
+else
+{
+	echo "<center><br>Loggen Sie sich bitte ein oder erstellen Sie sich einen Account <br>
+	um Fragen zu stellen, zu beantworten oder Statistiken dazu einsehen zu können.<br><br>
+	<center><a class='Menuelink' href='login.php'>Login</a><br>
+	<a class='Menuelink' href='register.php'>Registrieren</a></center>";
 }
 
 
