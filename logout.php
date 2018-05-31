@@ -51,7 +51,7 @@ session_destroy();
 	</a>
   </div>
   <div id="main">
-	Sie haben sich erfolgreich ausgeloggt.
+	<br>Sie haben sich erfolgreich ausgeloggt.
   </div>
 </body>
 </html>
