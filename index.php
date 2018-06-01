@@ -104,7 +104,7 @@ if (isset($_GET['answered']))
 					if ($answer_count > 0){
 						while ($row = mysqli_fetch_object($get_answers))
 						{
-							echo "<input type='radio' id='answer_a' name='Frage' value='".$row->id."'><label for='answer_a'>".$row->answer."</label>";
+							echo "<input type='radio' id='answer_".$row->id."' name='Frage' value='".$row->id."'><label for='answer_".$row->id."'>".$row->answer."</label>";
 						}
 						echo "
 								</fieldset>
